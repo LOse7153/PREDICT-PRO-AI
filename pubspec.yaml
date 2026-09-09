@@ -1,0 +1,16 @@
+name: predict_pro_ai
+description: PREDICT PRO AI — application Android de prédiction football basée sur données réelles.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.2
+  flutter_secure_storage: ^9.2.4
+
+flutter:
+  uses-material-design: true
