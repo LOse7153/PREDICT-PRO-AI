@@ -1,4 +1,4 @@
-name: Build PREDICT PRO AI Android
+github/Wokflowsname: Build PREDICT PRO AI Android
 
 on:
   push:
