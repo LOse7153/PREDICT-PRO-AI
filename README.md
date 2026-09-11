@@ -3,13 +3,13 @@
 Cette version mobile est conçue pour travailler avec des **données de football réellement récupérées** auprès de football-data.org v4.
 
 ## Ce qui est réel
-- Les matchs sont récupérés depuis l'API football-data.org v4.
+- Les matchs sont récupérés depuis l'API 1xbet 
 - Les scores et statuts LIVE viennent de l'API lorsqu'ils sont disponibles.
 - Les historiques des équipes sont récupérés depuis l'API.
 - Les probabilités sont recalculées pour chaque match.
 - Aucun score d'exemple n'est utilisé comme prédiction réelle.
-- Le moteur combine Poisson/Dixon-Coles, forme, Elo et Monte-Carlo.
-- TIPSTER transforme les probabilités en 1X, X2, 1, 2 ou PASS.
+- Le moteur combine Poisson/Dixon-Coles, forme, Elo, Monte-Carlo et github 
+- TIPSTER transforme les probabilités en 1X, X2, 1, 2, score exact ou PASS.
 - Si la clé OpenAI est configurée, IA TIPSTER effectue une seconde lecture des candidats à partir des données calculées.
 
 ## Limite importante
@@ -21,7 +21,7 @@ Au premier lancement, entre ton token `football-data.org` dans l'application. Il
 ## Activer IA TIPSTER
 Dans l'application, appuie sur l'icône ✨ et entre une clé API OpenAI. La clé est stockée localement pour cette version personnelle.
 
-IA TIPSTER reçoit uniquement les candidats et les statistiques calculées par PREDICT PRO AI. Elle doit répondre avec une sélection parmi `1`, `X2`, `1X`, `2` ou `PASS` et une courte justification. Elle n'est pas autorisée à inventer des cotes, blessures ou actualités.
+IA TIPSTER reçoit uniquement les candidats et les statistiques calculées par PREDICT PRO AI. Elle doit répondre avec une sélection parmi `1`, `X2`, `1X`, `2`, `score exact` ou `PASS` et une courte justification. Elle n'est pas autorisée à inventer des cotes, blessures ou actualités.
 
 Pour une application publique, ne distribue pas une clé OpenAI dans l'APK : mets l'appel OpenAI derrière un backend sécurisé.
 
