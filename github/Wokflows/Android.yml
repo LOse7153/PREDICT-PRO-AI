@@ -1,4 +1,5 @@
-github/Wokflowsname: Build PREDICT PRO AI Android
+
+name: Build PREDICT PRO AI Android
 
 on:
   push:
@@ -14,16 +15,25 @@ jobs:
       - name: Télécharger le dépôt
         uses: actions/checkout@v4
 
-      - name: Décompresser le projet PREDICT PRO AI
+      - name: Décompresser le projet
         run: |
           unzip -o PREDICT_PRO_AI_Android_GitHub.zip
-          ls -la
           ls -la predict_pro_ai_android
 
       - name: Installer Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+
+      - name: Régénérer Android
+        working-directory: predict_pro_ai_android
+        run: flutter create --platforms=android .
+
+      - name: Vérifier Gradle
+        working-directory: predict_pro_ai_android
+        run: |
+          chmod +x android/gradlew
+          android/gradlew --version
 
       - name: Installer les dépendances
         working-directory: predict_pro_ai_android
