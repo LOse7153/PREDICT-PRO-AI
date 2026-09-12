@@ -1,2 +1,47 @@
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
-        
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Télécharger le dépôt
+        uses: actions/checkout@v4
+
+      - name: Décompresser le projet
+        run: |
+          unzip -o PREDICT_PRO_AI_Android_GitHub.zip
+          ls -la predict_pro_ai_android
+
+      - name: Installer Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Régénérer Android
+        working-directory: predict_pro_ai_android
+        run: flutter create --platforms=android .
+
+      - name: Vérifier Gradle
+        working-directory: predict_pro_ai_android
+        run: |
+          chmod +x android/gradlew
+          android/gradlew --version
+
+      - name: Installer les dépendances
+        working-directory: predict_pro_ai_android
+        run: flutter pub get
+
+      - name: Construire l'APK
+        working-directory: predict_pro_ai_android
+        run: flutter build apk --release
+
+      - name: Publier l'APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: predict-pro-ai-release-apk
+          path: predict_pro_ai_android/build/app/outputs/flutter-apk/app-release.apk
