@@ -1,1 +1,49 @@
+name: Build PREDICT PRO AI Android
 
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Décompresser le projet
+        run: |
+          unzip -o PREDICT_PRO_AI_Android_GitHub_CORRIGE_AGP9.zip
+
+      - name: Installer Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Trouver le projet Flutter
+        run: |
+          PROJECT_DIR="$(dirname "$(find . -name pubspec.yaml | head -n 1)")"
+          echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
+
+      - name: Préparer Android
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: |
+          if [ ! -d android ]; then
+            flutter create --platforms=android .
+          fi
+
+      - name: Installer les dépendances
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: flutter pub get
+
+      - name: Construire APK
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: flutter build apk --release
+
+      - name: Publier APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: predict-pro-ai-release-apk
+          path: ${{ env.PROJECT_DIR }}/build/app/outputs/flutter-apk/app-release.apk
